@@ -1,3 +1,4 @@
+// Point.java
 public class Point {
     public final double x;
     public final double y;
@@ -7,20 +8,20 @@ public class Point {
         this.y = y;
     }
 
-    public Point translateX(double t) {
-        return new Point(x + t, y);
+    public static double distance(Point p1, Point p2) {
+        return Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
     }
 
-    public Point translateY(double t) {
-        return new Point(x, y + t);
+    public Point translateX(double x) {
+        return new Point(this.x + x, this.y);
+    }
+
+    public Point translateY(double y) {
+        return new Point(this.x, this.y + y);
     }
 
     @Override
     public String toString() {
         return "(" + x + ", " + y + ")";
-    }
-
-    public static double distance(Point p1, Point p2) {
-        return Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
     }
 }

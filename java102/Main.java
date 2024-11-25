@@ -1,26 +1,66 @@
+// Main.java
+abstract class Shape {
+    abstract double area(); // Abstract method for area
+}
+
+class Point {
+    double x, y;
+
+    Point(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+class Circle extends Shape {
+    Point center;
+    double radius;
+
+    Circle(Point center, double radius) {
+        this.center = center;
+        this.radius = radius;
+    }
+
+    @Override
+    double area() {
+        return Math.PI * radius * radius;
+    }
+}
+
+class Square extends Shape {
+    Point corner;
+    double sideLength;
+
+    Square(Point corner, double sideLength) {
+        this.corner = corner;
+        this.sideLength = sideLength;
+    }
+
+    @Override
+    double area() {
+        return sideLength * sideLength;
+    }
+}
+
 public class Main {
+
+    static double sumArea(Shape[] shapes) {
+        double sum = 0;
+        for (Shape shape : shapes) {
+            sum += shape.area();
+        }
+        return sum;
+    }
+
     public static void main(String[] args) {
-        Point point = new Point(1, 2);
+        Shape[] shapes = {
+            new Circle(new Point(1.8, -20), 2),
+            new Square(new Point(100, 2.1), 5.4),
+            new Circle(new Point(0, 0), 1),
+            new Circle(new Point(4, 9.123), 98.32),
+            new Square(new Point(-321, 0), 0.02)
+        };
 
-        Point p2 = point.translateX(3);
-        System.out.println("Translated point: (" + p2.x + ", " + p2.y + ")");
-
-        Point xTranslation = point.translateX(6);
-        Point yTranslation = point.translateY(-7);
-        Point xyTranslation = point.translateX(-4).translateY(-3);
-                System.out.println(" ");
-
-
-        System.out.println("x transl: (" + xTranslation.x + ", " + xTranslation.y + ")");
-                System.out.println(" ");
-
-        
-        System.out.println("y transl: (" + yTranslation.x + ", " + yTranslation.y + ")");
-                System.out.println(" ");
-
-        System.out.println("xy transl: (" + xyTranslation.x + ", " + xyTranslation.y + ")");
-                System.out.println(" ");
-
-     
+        System.out.println(sumArea(shapes));
     }
 }
